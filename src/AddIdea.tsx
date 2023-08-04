@@ -1,4 +1,5 @@
 import React from 'react';
+import supabase from '@hooks/useSupabase';
 import * as z from 'zod';
 import {
   Select,
@@ -125,7 +126,9 @@ const FormSchema = z.object({
   description: z.string().min(10, {
     message: 'La description doit être au moins de 10 caractères.'
   }),
-  category: z.enum(categories.map((category) => category.value)),
+  category: z.enum(
+    categories.map((category) => category.value) as [string, ...string[]]
+  ),
   estimated_time: z.enum(['day', 'week', 'month', 'year'])
 });
 
@@ -135,6 +138,22 @@ export default function AddIdea() {
   });
 
   function onSubmit(data: z.infer<typeof FormSchema>) {
+    async function insertIdea() {
+      const { data: idea, error } = await supabase.from('ideas').insert([
+        {
+          title: data.title,
+          description: data.description,
+          category: [data.category],
+          estimated_time: data.estimated_time
+        }
+      ]);
+      if (error) {
+        console.error(error);
+        return;
+      }
+      console.log(idea);
+    }
+    insertIdea();
     toast({
       title: 'You submitted the following values:',
       description: (
@@ -200,7 +219,7 @@ export default function AddIdea() {
                   <PopoverContent className="">
                     <Command>
                       <CommandInput placeholder="Rechercher une catégorie" />
-                      <CommandEmpty>No framework found.</CommandEmpty>
+                      <CommandEmpty>Aucune catégorie trouvée</CommandEmpty>
                       <CommandGroup>
                         {categories.map((category) => (
                           <CommandItem
