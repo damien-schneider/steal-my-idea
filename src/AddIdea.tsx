@@ -132,7 +132,15 @@ const FormSchema = z.object({
   estimated_time: z.enum(['day', 'week', 'month', 'year'])
 });
 
-export default function AddIdea() {
+interface AddIdeaProps {
+  isAddIdeaOpen: boolean;
+  setIsAddIdeaOpen: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+export default function AddIdea({
+  isAddIdeaOpen,
+  setIsAddIdeaOpen
+}: AddIdeaProps) {
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema)
   });
@@ -167,144 +175,160 @@ export default function AddIdea() {
 
   return (
     <>
-      <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-          <FormField
-            control={form.control}
-            name="title"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Titre</FormLabel>
-                <FormControl>
-                  <Input
-                    placeholder="Titre de votre idée de génie"
-                    {...field}
-                  />
-                </FormControl>
-                <FormDescription>
-                  Choisissez un titre qui décrit bien votre idée, ne mettez pas
-                  par exemple "idée de génie"
-                </FormDescription>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          {/* Form combobox for category */}
-          <FormField
-            control={form.control}
-            name="category"
-            render={({ field }) => (
-              <FormItem className="flex flex-col">
-                <FormLabel>Categorie</FormLabel>
-                <Popover>
-                  <PopoverTrigger asChild>
-                    <FormControl>
-                      <Button
-                        variant="outline"
-                        role="combobox"
-                        className={cn(
-                          'justify-between',
-                          !field.value && 'text-muted-foreground'
-                        )}
-                      >
-                        {field.value
-                          ? categories.find(
-                              (category) => category.value === field.value
-                            )?.label
-                          : 'Sélectionner une catégorie'}
-                        <ChevronsUpDown className="w-4 h-4 ml-2 opacity-50 shrink-0" />
-                      </Button>
-                    </FormControl>
-                  </PopoverTrigger>
-                  <PopoverContent className="">
-                    <Command>
-                      <CommandInput placeholder="Rechercher une catégorie" />
-                      <CommandEmpty>Aucune catégorie trouvée</CommandEmpty>
-                      <CommandGroup>
-                        {categories.map((category) => (
-                          <CommandItem
-                            value={category.label}
-                            key={category.value}
-                            onSelect={() => {
-                              form.setValue('category', category.value);
-                            }}
-                          >
-                            <Check
-                              className={cn(
-                                'mr-2 h-4 w-4',
-                                category.value === field.value
-                                  ? 'opacity-100'
-                                  : 'opacity-0'
-                              )}
-                            />
-                            {category.label}
-                          </CommandItem>
-                        ))}
-                      </CommandGroup>
-                    </Command>
-                  </PopoverContent>
-                </Popover>
-                <FormDescription>
-                  Choisissez les catégories qui correspondent le mieux à votre
-                  idée.
-                </FormDescription>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="description"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Description</FormLabel>
-                <FormControl>
-                  <Textarea
-                    placeholder="Décrivez votre idée de génie"
-                    className=""
-                    {...field}
-                  />
-                </FormControl>
-                <FormDescription>
-                  Décrivez votre idée de génie, soyez le plus précis possible.
-                </FormDescription>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="estimated_time"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Temps estimée</FormLabel>
-                <FormControl>
-                  <Select
-                    onValueChange={field.onChange}
-                    defaultValue={field.value}
-                  >
-                    <SelectTrigger className="">
-                      <SelectValue placeholder="Temps estimée" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="day">1 jour</SelectItem>
-                      <SelectItem value="week">1 semaine</SelectItem>
-                      <SelectItem value="month">1 mois</SelectItem>
-                      <SelectItem value="year">1 an</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </FormControl>
-                <FormDescription>
-                  Le temps estimée pour réaliser cette idée.
-                </FormDescription>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
+      <div
+        className={`absolute top-0 left-0 w-full h-full bg-red-200 z-50 rounded-md transition-all duration-300 ease-in-out ${
+          isAddIdeaOpen
+            ? 'translate-y-0'
+            : 'opacity-0 pointer-events-none translate-y-full'
+        }`}
+      >
+        <div className="flex justify-end">
+          <button className="" onClick={() => setIsAddIdeaOpen(!isAddIdeaOpen)}>
+            close
+          </button>
+        </div>
+        <Form {...form}>
+          <form
+            onSubmit={form.handleSubmit(onSubmit)}
+            className={`flex flex-col items-center gap-6 w-full p-8 `}
+          >
+            <FormField
+              control={form.control}
+              name="title"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Titre</FormLabel>
+                  <FormControl>
+                    <Input
+                      placeholder="Titre de votre idée de génie"
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormDescription>
+                    Choisissez un titre qui décrit bien votre idée, ne mettez
+                    pas par exemple "idée de génie"
+                  </FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            {/* Form combobox for category */}
+            <FormField
+              control={form.control}
+              name="category"
+              render={({ field }) => (
+                <FormItem className="flex flex-col">
+                  <FormLabel>Categorie</FormLabel>
+                  <Popover>
+                    <PopoverTrigger asChild>
+                      <FormControl>
+                        <Button
+                          variant="outline"
+                          role="combobox"
+                          className={cn(
+                            'justify-between',
+                            !field.value && 'text-muted-foreground'
+                          )}
+                        >
+                          {field.value
+                            ? categories.find(
+                                (category) => category.value === field.value
+                              )?.label
+                            : 'Sélectionner une catégorie'}
+                          <ChevronsUpDown className="w-4 h-4 ml-2 opacity-50 shrink-0" />
+                        </Button>
+                      </FormControl>
+                    </PopoverTrigger>
+                    <PopoverContent className="">
+                      <Command>
+                        <CommandInput placeholder="Rechercher une catégorie" />
+                        <CommandEmpty>Aucune catégorie trouvée</CommandEmpty>
+                        <CommandGroup>
+                          {categories.map((category) => (
+                            <CommandItem
+                              value={category.label}
+                              key={category.value}
+                              onSelect={() => {
+                                form.setValue('category', category.value);
+                              }}
+                            >
+                              <Check
+                                className={cn(
+                                  'mr-2 h-4 w-4',
+                                  category.value === field.value
+                                    ? 'opacity-100'
+                                    : 'opacity-0'
+                                )}
+                              />
+                              {category.label}
+                            </CommandItem>
+                          ))}
+                        </CommandGroup>
+                      </Command>
+                    </PopoverContent>
+                  </Popover>
+                  <FormDescription>
+                    Choisissez les catégories qui correspondent le mieux à votre
+                    idée.
+                  </FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="description"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Description</FormLabel>
+                  <FormControl>
+                    <Textarea
+                      placeholder="Décrivez votre idée de génie"
+                      className=""
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormDescription>
+                    Décrivez votre idée de génie, soyez le plus précis possible.
+                  </FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="estimated_time"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Temps estimée</FormLabel>
+                  <FormControl>
+                    <Select
+                      onValueChange={field.onChange}
+                      defaultValue={field.value}
+                    >
+                      <SelectTrigger className="">
+                        <SelectValue placeholder="Temps estimée" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="day">1 jour</SelectItem>
+                        <SelectItem value="week">1 semaine</SelectItem>
+                        <SelectItem value="month">1 mois</SelectItem>
+                        <SelectItem value="year">1 an</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </FormControl>
+                  <FormDescription>
+                    Le temps estimée pour réaliser cette idée.
+                  </FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
 
-          <Button type="submit">Submit</Button>
-        </form>
-      </Form>
+            <Button type="submit">Submit</Button>
+          </form>
+        </Form>
+      </div>
     </>
   );
 }
