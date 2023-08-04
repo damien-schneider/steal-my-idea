@@ -11,30 +11,30 @@ export interface Database {
     Tables: {
       ideas: {
         Row: {
-          category: string[] | null
+          category: string[]
           created_at: string | null
-          description: string | null
-          estimated_time: string | null
+          description: string
+          estimated_time: string
           id: number
-          title: string | null
+          title: string
           user_id: number | null
         }
         Insert: {
-          category?: string[] | null
+          category: string[]
           created_at?: string | null
-          description?: string | null
-          estimated_time?: string | null
+          description: string
+          estimated_time: string
           id?: number
-          title?: string | null
+          title: string
           user_id?: number | null
         }
         Update: {
-          category?: string[] | null
+          category?: string[]
           created_at?: string | null
-          description?: string | null
-          estimated_time?: string | null
+          description?: string
+          estimated_time?: string
           id?: number
-          title?: string | null
+          title?: string
           user_id?: number | null
         }
         Relationships: []
