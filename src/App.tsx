@@ -1,24 +1,37 @@
-import { useState } from 'react';
-import { Input } from './components/ui/input';
-import { Button } from './components/ui/button';
+import AddIdea from './AddIdea';
+import Map from './Map';
 import './index.css';
+import { Button } from '@components/ui/button';
+import { useState } from 'react';
+export interface Idea {
+  category: string[];
+  created_at: string | null;
+  description: string;
+  estimated_time: string;
+  id: number;
+  title: string;
+  user_id: number | null;
+}
 function App() {
-  const [count, setCount] = useState(0);
-
+  const [isAddIdeaOpen, setIsAddIdeaOpen] = useState(false);
+  const [ideas, setIdeas] = useState<Idea[]>([]);
+  //TODO Add 'escape' key to close addIdea
   return (
     <>
-      <div className="flex flex-col items-center w-full">
-        <h1 className="text-6xl font-semibold text-stone-700">Steal my idea</h1>
-        <Input type="text" placeholder="Search" />
-        <p>{count}</p>
-        <div className="flex">
-          <Button variant="outline" onClick={() => setCount(count + 1)}>
-            Add 1
-          </Button>
-          <Button variant="outline" onClick={() => setCount(count - 1)}>
-            Subtract 1
-          </Button>
-        </div>
+      <div className="relative w-full h-screen overflow-hidden bg-stone-300">
+        <Button
+          className="absolute z-50 text-lg -translate-x-1/2 bottom-8 left-1/2"
+          onClick={() => setIsAddIdeaOpen(!isAddIdeaOpen)}
+        >
+          Ajouter une idée
+        </Button>
+        <AddIdea
+          setIdeas={setIdeas}
+          setIsAddIdeaOpen={setIsAddIdeaOpen}
+          isAddIdeaOpen={isAddIdeaOpen}
+        />
+        <Map setIdeas={setIdeas} ideas={ideas} />
+        <button>Go to random note</button>
       </div>
     </>
   );
