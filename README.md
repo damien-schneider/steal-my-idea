@@ -17,6 +17,9 @@ This project is open source and you are welcome to contribute. If you want to co
 
 - [ ] Improve style of the close button in the idea modal
 - [ ] Improve documentation for contributation (This Readme.md)
+  - [ ] Add a summary
+  - [ ] Add preview Image of the site
+  - [ ] Add Emoji
 - [ ] Improve post-it Idea style
 
 ### Medium
