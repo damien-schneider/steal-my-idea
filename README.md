@@ -21,6 +21,8 @@ This project is open source and you are welcome to contribute. If you want to co
   - [ ] Add preview Image of the site
   - [ ] Add Emoji
 - [ ] Improve post-it Idea style
+- [ ] Update the Favicon
+- [ ] Update the title and others metadata of the html page
 
 ### Medium
 
@@ -32,6 +34,7 @@ This project is open source and you are welcome to contribute. If you want to co
 
 - [ ] Add a multi selection for the categories (just in the form selection because it is already implemented in the data structure and the insert function)
 - [ ] Improve the repartition of the post-it on the screen (maybe with a grid, to discuss)
+- [ ] Add filter by Category to load only ideas of the selected filters
 
 ## Bugs / Improvements
 
