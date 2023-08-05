@@ -38,9 +38,11 @@ import {
   PopoverContent,
   PopoverTrigger
 } from '@components/ui/popover';
-import { toast } from '@components/ui/use-toast';
+import { useToast } from '@components/ui/use-toast';
 import { Input } from '@components/ui/input';
 import type { Idea } from './App';
+
+import { Toaster } from '@components/ui/toaster';
 
 const categories = [
   {
@@ -147,6 +149,7 @@ export default function AddIdea({
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema)
   });
+  const { toast } = useToast();
 
   function onSubmit(data: z.infer<typeof FormSchema>) {
     async function insertIdea() {
@@ -169,19 +172,19 @@ export default function AddIdea({
       setIdeas((ideas) => [...ideas, idea[0]]);
     }
     insertIdea();
-    toast({
-      title: 'You submitted the following values:',
-      description: (
-        <pre className="pt-2 w-[340px] z-50 rounded-md bg-slate-950 p-4">
-          <code className="text-white">{JSON.stringify(data, null, 2)}</code>
-        </pre>
-      )
-    });
-    alert(JSON.stringify(data, null, 2));
+    handleToast();
+    setIsAddIdeaOpen(false);
   }
 
+  function handleToast() {
+    toast({
+      title: 'Votre idée à bien été ajoutée',
+      description: 'Retrouvez là au milieu des autres idées !'
+    });
+  }
   return (
     <>
+      <Toaster />
       <div
         className={`p-8 absolute bottom-0 left-0 w-full z-50 transition-all duration-300 ease-in-out ${
           isAddIdeaOpen
