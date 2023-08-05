@@ -31,7 +31,7 @@ export default function Map({ setIdeas, ideas }: MapProps) {
         disablePadding={true}
         minScale={0.1}
       >
-        <TransformComponent wrapperClass="w-full h-full">
+        <TransformComponent wrapperStyle={{ width: '100%', height: '100%' }}>
           {ideas.map((idea, index) => (
             <div
               key={index}
