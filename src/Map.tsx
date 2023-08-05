@@ -4,7 +4,7 @@ import { TransformWrapper, TransformComponent } from 'react-zoom-pan-pinch';
 
 export default function Map() {
   return (
-    <div className="w-screen h-screen bg-pink-300">
+    <div className="w-full h-screen bg-pink-300">
       <div className="w-full overflow-hidden bg-blue-300 h-3/4">
         <TransformWrapper
           initialScale={1}

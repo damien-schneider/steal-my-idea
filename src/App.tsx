@@ -9,9 +9,9 @@ function App() {
   //TODO Add 'escape' key to close addIdea
   return (
     <>
-      <div className="relative w-screen h-screen bg-stone-300">
+      <div className="relative w-full h-screen bg-stone-300">
         <Button
-          className="absolute z-50 -translate-x-1/2 bottom-6 left-1/2"
+          className="absolute z-50 text-lg -translate-x-1/2 bottom-8 left-1/2"
           onClick={() => setIsAddIdeaOpen(!isAddIdeaOpen)}
         >
           Ajouter une idée
