@@ -40,6 +40,7 @@ import {
 } from '@components/ui/popover';
 import { toast } from '@components/ui/use-toast';
 import { Input } from '@components/ui/input';
+import type { Idea } from './App';
 
 const categories = [
   {
@@ -135,11 +136,13 @@ const FormSchema = z.object({
 interface AddIdeaProps {
   isAddIdeaOpen: boolean;
   setIsAddIdeaOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  setIdeas: React.Dispatch<React.SetStateAction<Idea[]>>;
 }
 
 export default function AddIdea({
   isAddIdeaOpen,
-  setIsAddIdeaOpen
+  setIsAddIdeaOpen,
+  setIdeas
 }: AddIdeaProps) {
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema)
@@ -147,19 +150,23 @@ export default function AddIdea({
 
   function onSubmit(data: z.infer<typeof FormSchema>) {
     async function insertIdea() {
-      const { data: idea, error } = await supabase.from('ideas').insert([
-        {
-          title: data.title,
-          description: data.description,
-          category: [data.category],
-          estimated_time: data.estimated_time
-        }
-      ]);
+      const { data: idea, error } = await supabase
+        .from('ideas')
+        .insert([
+          {
+            title: data.title,
+            description: data.description,
+            category: [data.category],
+            estimated_time: data.estimated_time
+          }
+        ])
+        .select();
       if (error) {
         console.error(error);
         return;
       }
       console.log(idea);
+      setIdeas((ideas) => [...ideas, idea[0]]);
     }
     insertIdea();
     toast({
@@ -183,7 +190,7 @@ export default function AddIdea({
         }`}
       >
         <div
-          className={` w-full bg-white/60 backdrop-blur-xl z-50 rounded-xl border border-white`}
+          className={` w-full bg-white/60 backdrop-blur-xl z-50 rounded-xl border border-white shadow-2xl`}
         >
           <div className="flex justify-end">
             <button
