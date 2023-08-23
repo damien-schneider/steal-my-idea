@@ -40,7 +40,7 @@ import {
 } from '@components/ui/popover';
 import { useToast } from '@components/ui/use-toast';
 import { Input } from '@components/ui/input';
-import type { Idea } from './App';
+import { Idea } from '@utils/types'
 
 const categories = [
   {
