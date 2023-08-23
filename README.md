@@ -22,7 +22,7 @@ This project is open source and you are welcome to contribute. If you want to co
   - [ ] Add Emoji
 - [ ] Improve post-it Idea style
 - [ ] Update the Favicon
-- [ ] Update the title and others metadata of the html page
+- [x] Update the title and others metadata of the html page
 
 ### Medium
 
