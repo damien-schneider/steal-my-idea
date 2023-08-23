@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { TransformWrapper, TransformComponent } from 'react-zoom-pan-pinch';
 import supabase from '@hooks/useSupabase';
-import type { Idea } from './App';
+import { Idea } from '@utils/types'
 
 interface MapProps {
   setIdeas: (ideas: Idea[]) => void;
