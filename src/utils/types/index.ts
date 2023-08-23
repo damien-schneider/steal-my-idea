@@ -7,3 +7,8 @@ export interface Idea {
     title: string;
     user_id: number | null;
 }
+
+export interface ICategory {
+    value: string;
+    label: string;
+}
