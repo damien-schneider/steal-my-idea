@@ -42,8 +42,6 @@ import { useToast } from '@components/ui/use-toast';
 import { Input } from '@components/ui/input';
 import type { Idea } from './App';
 
-import { Toaster } from '@components/ui/toaster';
-
 const categories = [
   {
     value: 'informatique',
@@ -184,7 +182,6 @@ export default function AddIdea({
   }
   return (
     <>
-      <Toaster />
       <div
         className={`p-8 absolute bottom-0 left-0 w-full z-50 transition-all duration-300 ease-in-out ${
           isAddIdeaOpen

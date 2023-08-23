@@ -1,8 +1,12 @@
-import AddIdea from './AddIdea';
+import { useState } from 'react';
+
+import AddIdea from '@/AddIdea';
 import Map from './Map';
 import './index.css';
 import { Button } from '@components/ui/button';
-import { useState } from 'react';
+import { Toaster } from '@components/ui/toaster';
+
+
 export interface Idea {
   category: string[];
   created_at: string | null;
@@ -18,6 +22,7 @@ function App() {
   //TODO Add 'escape' key to close addIdea
   return (
     <>
+      <Toaster />
       <div className="relative w-full h-screen overflow-hidden bg-stone-300">
         <Button
           className="absolute z-50 text-lg -translate-x-1/2 bottom-8 left-1/2"
