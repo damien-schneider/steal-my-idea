@@ -80,6 +80,10 @@ This project is open source and you are welcome to contribute. If you want to co
 - Create a pull request to merge your branch into the dev branch
 - Wait for the review of your pull request
 
+### Development guidelines
+
+- [How to setup your local dev environment?](docs/LOCAL_SETUP.md)
+
 With Vite :
 
 - Press `o` to open the project in your browser
