@@ -15,7 +15,7 @@ function App() {
   return (
     <>
       <Toaster />
-      <div className="relative w-full h-screen overflow-hidden bg-stone-300">
+      <div className="relative w-full h-[100dvh] overflow-hidden bg-stone-300">
         <Button
           className="absolute z-50 text-lg -translate-x-1/2 bottom-8 left-1/2"
           onClick={() => setIsAddIdeaOpen(!isAddIdeaOpen)}
