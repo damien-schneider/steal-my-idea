@@ -26,7 +26,7 @@ This project is open source and you are welcome to contribute. If you want to co
 
 ### Medium
 
-- [ ] Add a possibility to exit the add idea modal by clicking outside
+- [x] Add a possibility to exit the add idea modal by clicking outside
 - [ ] Add dark mode
 - [ ] Add a context menu on the post-it to report an idea (only the front with a variable set to false (I will implement it in the database just after it is done))
 

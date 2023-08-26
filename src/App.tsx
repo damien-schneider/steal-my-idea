@@ -5,10 +5,11 @@ import Map from '@/Map';
 import '@/index.css';
 import { Button } from '@components/ui/button';
 import { Toaster } from '@components/ui/toaster';
-import { Idea } from '@utils/types'
+import { Idea } from '@utils/types';
+import { useIdeaModal } from '@contexts/IdeaModalContext';
 
 function App() {
-  const [isAddIdeaOpen, setIsAddIdeaOpen] = useState(false);
+  const { isAddIdeaOpen, setIsAddIdeaOpen } = useIdeaModal();
   const [ideas, setIdeas] = useState<Idea[]>([]);
   //TODO Add 'escape' key to close addIdea
   return (
@@ -21,11 +22,7 @@ function App() {
         >
           Ajouter une idée
         </Button>
-        <AddIdea
-          setIdeas={setIdeas}
-          setIsAddIdeaOpen={setIsAddIdeaOpen}
-          isAddIdeaOpen={isAddIdeaOpen}
-        />
+        <AddIdea setIdeas={setIdeas} />
         <Map setIdeas={setIdeas} ideas={ideas} />
         <button>Go to random note</button>
       </div>

@@ -40,9 +40,11 @@ import {
 } from '@components/ui/popover';
 import { useToast } from '@components/ui/use-toast';
 import { Input } from '@components/ui/input';
-import { Idea } from '@utils/types'
+import { Idea, ICategory } from '@utils/types';
 
-const categories = [
+import { useIdeaModal } from '@contexts/IdeaModalContext';
+
+const categories: ICategory[] = [
   {
     value: 'informatique',
     label: 'Informatique'
@@ -119,7 +121,8 @@ const categories = [
     value: 'ecriture',
     label: 'Écriture'
   }
-] as const;
+];
+
 const FormSchema = z.object({
   title: z.string().min(5, {
     message: 'Le titre doit être au moins de 5 caractères.'
@@ -134,16 +137,11 @@ const FormSchema = z.object({
 });
 
 interface AddIdeaProps {
-  isAddIdeaOpen: boolean;
-  setIsAddIdeaOpen: React.Dispatch<React.SetStateAction<boolean>>;
   setIdeas: React.Dispatch<React.SetStateAction<Idea[]>>;
 }
 
-export default function AddIdea({
-  isAddIdeaOpen,
-  setIsAddIdeaOpen,
-  setIdeas
-}: AddIdeaProps) {
+export default function AddIdea({ setIdeas }: AddIdeaProps) {
+  const { isAddIdeaOpen, setIsAddIdeaOpen } = useIdeaModal();
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema)
   });
@@ -183,11 +181,12 @@ export default function AddIdea({
   return (
     <>
       <div
-        className={`p-8 absolute bottom-0 left-0 w-full z-50 transition-all duration-300 ease-in-out ${
+        className={cn(
+          'p-8 absolute bottom-0 left-0 w-full z-50 transition-all duration-300 ease-in-out',
           isAddIdeaOpen
             ? 'translate-y-0'
             : 'pointer-events-none translate-y-full'
-        }`}
+        )}
       >
         <div
           className={` w-full bg-white/60 backdrop-blur-xl z-50 rounded-xl border border-white shadow-2xl`}
