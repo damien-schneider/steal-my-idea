@@ -1,35 +1,28 @@
-import AddIdea from './AddIdea';
-import Map from './Map';
-import './index.css';
-import { Button } from '@components/ui/button';
 import { useState } from 'react';
-export interface Idea {
-  category: string[];
-  created_at: string | null;
-  description: string;
-  estimated_time: string;
-  id: number;
-  title: string;
-  user_id: number | null;
-}
+
+import AddIdea from '@/AddIdea';
+import Map from '@/Map';
+import '@/index.css';
+import { Button } from '@components/ui/button';
+import { Toaster } from '@components/ui/toaster';
+import { Idea } from '@utils/types';
+import { useIdeaModal } from '@contexts/IdeaModalContext';
+
 function App() {
-  const [isAddIdeaOpen, setIsAddIdeaOpen] = useState(false);
+  const { isAddIdeaOpen, setIsAddIdeaOpen } = useIdeaModal();
   const [ideas, setIdeas] = useState<Idea[]>([]);
   //TODO Add 'escape' key to close addIdea
   return (
     <>
-      <div className="relative w-full h-screen overflow-hidden bg-stone-300">
+      <Toaster />
+      <div className="relative w-full h-[100dvh] overflow-hidden bg-stone-300">
         <Button
           className="absolute z-50 text-lg -translate-x-1/2 bottom-8 left-1/2"
           onClick={() => setIsAddIdeaOpen(!isAddIdeaOpen)}
         >
           Ajouter une idée
         </Button>
-        <AddIdea
-          setIdeas={setIdeas}
-          setIsAddIdeaOpen={setIsAddIdeaOpen}
-          isAddIdeaOpen={isAddIdeaOpen}
-        />
+        <AddIdea setIdeas={setIdeas} />
         <Map setIdeas={setIdeas} ideas={ideas} />
         <button>Go to random note</button>
       </div>

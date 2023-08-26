@@ -26,7 +26,7 @@ This project is open source and you are welcome to contribute. If you want to co
 
 ### Medium
 
-- [ ] Add a possibility to exit the add idea modal by clicking outside
+- [x] Add a possibility to exit the add idea modal by clicking outside
 - [ ] Add dark mode
 - [ ] Add a context menu on the post-it to report an idea (only the front with a variable set to false (I will implement it in the database just after it is done))
 
@@ -40,7 +40,7 @@ This project is open source and you are welcome to contribute. If you want to co
 
 ### Easy
 
-- [ ] Fix button position on mobile
+- [x] Fix button position on mobile
 - [ ] Refactor the code in AddIdeas.tsx
 
 ### Medium
@@ -79,6 +79,10 @@ This project is open source and you are welcome to contribute. If you want to co
 - Create a branch with the name of the feature you want to implement or the bug you want to fix
 - Create a pull request to merge your branch into the dev branch
 - Wait for the review of your pull request
+
+### Development guidelines
+
+- [How to setup your local dev environment?](docs/LOCAL_SETUP.md)
 
 With Vite :
 
