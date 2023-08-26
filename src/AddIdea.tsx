@@ -42,7 +42,7 @@ import { useToast } from '@components/ui/use-toast';
 import { Input } from '@components/ui/input';
 import { Idea, ICategory } from '@utils/types';
 
-import { useIdeaModal } from '@/hooks/useIdeaModal';
+import { useIdeaModal } from '@contexts/IdeaModalContext';
 
 const categories: ICategory[] = [
   {

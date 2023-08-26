@@ -3,7 +3,7 @@ import { TransformWrapper, TransformComponent } from 'react-zoom-pan-pinch';
 import supabase from '@hooks/useSupabase';
 import { Idea } from '@utils/types';
 
-import { useIdeaModal } from '@/hooks/useIdeaModal';
+import { useIdeaModal } from '@contexts/IdeaModalContext';
 
 interface MapProps {
   setIdeas: (ideas: Idea[]) => void;

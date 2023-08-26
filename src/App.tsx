@@ -6,7 +6,7 @@ import '@/index.css';
 import { Button } from '@components/ui/button';
 import { Toaster } from '@components/ui/toaster';
 import { Idea } from '@utils/types';
-import { useIdeaModal } from '@/hooks/useIdeaModal';
+import { useIdeaModal } from '@contexts/IdeaModalContext';
 
 function App() {
   const { isAddIdeaOpen, setIsAddIdeaOpen } = useIdeaModal();
