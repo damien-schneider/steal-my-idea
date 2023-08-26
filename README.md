@@ -40,7 +40,7 @@ This project is open source and you are welcome to contribute. If you want to co
 
 ### Easy
 
-- [ ] Fix button position on mobile
+- [x] Fix button position on mobile
 - [ ] Refactor the code in AddIdeas.tsx
 
 ### Medium

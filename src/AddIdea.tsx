@@ -18,7 +18,7 @@ import {
   FormLabel,
   FormMessage
 } from '@components/ui/form';
-
+import { IoClose } from 'react-icons/io5';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Check, ChevronsUpDown } from 'lucide-react';
 import { useForm } from 'react-hook-form';
@@ -191,12 +191,13 @@ export default function AddIdea({ setIdeas }: AddIdeaProps) {
         <div
           className={` w-full bg-white/60 backdrop-blur-xl z-50 rounded-xl border border-white shadow-2xl`}
         >
-          <div className="flex justify-end">
+          <div className="absolute right-0 top-2">
             <button
+              title='Fermer la fenêtre "Ajouter une idée"'
               className="pt-2 pr-4 text-xl "
               onClick={() => setIsAddIdeaOpen(!isAddIdeaOpen)}
             >
-              close
+              <IoClose size={24} />
             </button>
           </div>
           <Form {...form}>
