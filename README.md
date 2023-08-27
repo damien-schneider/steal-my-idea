@@ -11,6 +11,18 @@ This project is open source and you are welcome to contribute. If you want to co
 
 # Roadmap
 
+## Before Launching
+
+- [ ] Fix mobile add Idea modal
+- [ ] Add randomness placement of the post-it and non column layout
+- [ ] Add category colors
+- [ ] Add little bit more Ideas
+
+## As soon as possible after Launching
+
+- [ ] Add a way to report an idea
+- [ ] Add a multi selection for the categories
+
 ## Features
 
 ### Easy
